@@ -1,0 +1,5 @@
+[nexus]
+n9k ansible_host=173.36.220.34 ansible_user=admin ansible_password=nbv12345 ansible_network_os=nxos
+
+[local]
+localhost

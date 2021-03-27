@@ -1,0 +1,32 @@
+---
+- name: Create VLANs
+  hosts: nexus
+  connection: network_cli
+  gather_facts: no
+  tasks:
+    - nxos_vlans:
+        config:
+         - vlan_id: "{{ item.id }}"
+           name: "{{ item.name }}"
+        state: "{{ item.state }}"
+      with_list: "{{ vlan_list }}"
+
+      vars:
+          lan_state : 'merged'
+          #lan_state : 'deleted'
+
+          provider_ssh:
+              host: "{{ ansible_host }}"
+              username: "{{ ansible_username }}"
+              password: "{{ ansible_password }}"
+              transport: network_cli
+          vlan_list:
+              - name: "terraform-created-222"
+                id: '222'
+                native: 'yes'
+                state: "{{lan_state}}"
+              - name: "terraform-created-223"
+                id: '223'
+                native: 'no'
+                state: "{{lan_state}}"
+              

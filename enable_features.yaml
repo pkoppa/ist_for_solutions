@@ -1,0 +1,19 @@
+---
+- name: Enable features in NXOS
+  hosts: nexus
+  connection: network_cli
+  gather_facts: no
+  tasks:
+        - name: Enabling NXOS Features
+          nxos_feature:
+                feature: "{{ item }}"
+                state: enabled
+          with_items: "{{ enabled_features }}"
+  vars:
+        enabled_features:
+                - lacp
+                - vpc
+                - interface-vlan
+                - nxapi
+                - udld
+                - lldp
