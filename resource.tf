@@ -1,5 +1,6 @@
 
 /*
+Not required if ansible is already installed
 resource "null_resource" "prereqs" {
 
   provisioner "local-exec" {
